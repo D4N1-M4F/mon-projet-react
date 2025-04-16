@@ -11,8 +11,14 @@
   },
   "dependencies": {
     "antd": "^5.24.3",
+    "axios": "^1.8.4",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "json-2-csv": "^5.5.9",
+    "mysql2": "^3.14.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

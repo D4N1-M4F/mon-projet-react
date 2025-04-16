@@ -1,10 +1,25 @@
+/* Correction du fond noir : on force un fond blanc */
+body {
+  width: '100%';
+  background-color: white !important;
+  color: black !important;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;/* Safari */
+
+}
+
+/* Correction du conteneur principal */
 #root {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  
   text-align: center;
 }
 
+/* Logo : animation et effets */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -18,6 +33,7 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* Animation du logo */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -27,16 +43,35 @@
   }
 }
 
+/* Désactiver l'animation si l'utilisateur préfère moins de mouvement */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
 
+/* Style des cartes */
 .card {
   padding: 2em;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
 
+/* Texte des liens */
 .read-the-docs {
   color: #888;
+}
+
+/* Ajustements pour les textes dans le site */
+h1, h2, h3, h4 {
+  color: #333;
+}
+@media (max-width: 768px) {
+  .ant-layout-header {
+    padding: 0 16px ;
+  }
+  .search-bar {
+    display: none;
+  }
 }
