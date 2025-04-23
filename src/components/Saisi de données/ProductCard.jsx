@@ -94,12 +94,12 @@ const ProductCard = ({ product, onViewDetails, onAddToCart }) => {
                                     {product.discount ? (
                                         <>
                                             <span style={{ textDecoration: 'line-through', marginRight: 8 }}>
-                                                {product.price} €
+                                                {product.price} $CAD
                                             </span>
-                                            {Math.round(product.price * (1 - product.discount/100) * 100) / 100} €
+                                            {Math.round(product.price * (1 - product.discount/100) * 100) / 100} $CAD
                                         </>
                                     ) : (
-                                        `${product.price} €`
+                                        `${product.price} $CAD`
                                     )}
                                 </span>
                                 <Rate 

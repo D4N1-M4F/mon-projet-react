@@ -13,9 +13,11 @@ import CustomFooter from '../components/layout/Footer';
 import img1 from '../assets/gamme vaseline.png';
 import img2 from '../assets/gamme healthy glow2.png';
 import img3 from '../assets/gamme healthy glow.png';
-import acneImg from '../assets/acné.png';
-import hydratationImg from '../assets/hydratation2.png';
-import hyperpigmentationImg from '../assets/huile veetGold.png';
+import lotionsImg from '../assets/Lotions.png'; 
+import gelsDouchesImg from '../assets/gel douche vaseline.png';
+import huilesImg from '../assets/huile veetGold.png';
+import serumsImg from '../assets/sérum vaseline.png';
+import gammesImg from '../assets/gamme vaseline.png';
 import produit1 from '../assets/sérum vaseline.png';
 import produit2 from '../assets/VeetGold gel gommant.png';
 import produit3 from '../assets/Vaseline gel gommant.jpeg';
@@ -37,7 +39,7 @@ const Home = () => {
       name: "Gel Gommant Veet Gold", 
       price: 39.99, 
       rating: 4.2,
-      stock: 3, // Faible stock
+      stock: 3,
       image: produit2 
     },
     { 
@@ -45,17 +47,20 @@ const Home = () => {
       name: "Gel Hydratant Vaseline", 
       price: 49.99, 
       rating: 4.7,
-      stock: 0, // Rupture de stock
+      stock: 0,
       image: produit3 
     },
   ];
 
+  // Mise à jour des catégories pour correspondre à votre liste
   const categories = [
-    { id: "acne", name: "Soins Anti-Acné", image: acneImg },
-    { id: "hydration", name: "Hydratation Intense", image: hydratationImg },
-    { id: "hyperpigmentation", name: "Uniformisation", image: hyperpigmentationImg },
+    { id: "lotions", name: "Lotions", image: lotionsImg },
+    { id: "gels-douches", name: "Gels Douches", image: gelsDouchesImg },
+    { id: "huiles", name: "Huiles", image: huilesImg },
+    { id: "serums", name: "Sérums", image: serumsImg },
+    { id: "gammes", name: "Gammes", image: gammesImg },
   ];
-
+  
   const carouselItems = [
     { id: 1, image: img1, title: "Nouvelle Gamme Vaseline", subtitle: "Découvrez notre collection exclusive" },
     { id: 2, image: img2, title: "Healthy Glow", subtitle: "Pour un teint éclatant" },
@@ -75,7 +80,7 @@ const Home = () => {
         <Carousel 
           autoplay 
           style={{ 
-            height: '400px', // Fixez une hauteur max
+            height: '400px',
             borderRadius: '8px',
             overflow: 'hidden'
           }}
@@ -89,8 +94,8 @@ const Home = () => {
                   height: '400px', 
                   objectFit: 'cover', 
                   objectPosition: 'center' 
-                
                 }} 
+                alt={item.title}
               />
             </div>
           ))}
@@ -109,7 +114,7 @@ const Home = () => {
           <Divider orientation="left">
             <Title level={3} style={{ color: '#1890ff' }}>Nouveautés</Title>
           </Divider>
-          <NewArrivals products={[...trendingProducts].reverse()} /> {/* Exemple avec les mêmes produits inversés */}
+          <NewArrivals products={[...trendingProducts].reverse()} />
         </section>
 
         <section style={{ marginBottom: 60 }}>
@@ -126,8 +131,6 @@ const Home = () => {
           <ProductByGamme gammes={trendingProducts} />
         </section>
       </Content>
-
-      
     </Layout>
   );
 };

@@ -3,7 +3,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import connection from './db.js';
 
-// Pour obtenir le chemin du fichier dans un ES module :
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -12,6 +11,6 @@ const sql = fs.readFileSync(sqlPath, 'utf8');
 
 connection.query(sql, (err, results) => {
   if (err) throw err;
-  console.log('✅ SQL importé avec succès.');
+  console.log(' SQL importé avec succès.');
   connection.end();
 });

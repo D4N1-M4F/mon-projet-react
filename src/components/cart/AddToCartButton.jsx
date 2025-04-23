@@ -1,20 +1,18 @@
 import React from 'react';
-import { Button, Tooltip, message } from 'antd';
+import { Button, Tooltip } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
+import { useCart } from '../contexts/CartContext';
 
-// Props attendus : product (objet), compact (booléen)
 const AddToCartButton = ({ product, compact = false }) => {
+  const { addToCart } = useCart();
+
   const handleAddToCart = () => {
-    // Simule l'ajout (à remplacer avec state global / localStorage)
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const updatedCart = [...cart, { ...product, quantity: 1 }];
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-    message.success(`${product.name} ajouté au panier`);
+    addToCart(product);
   };
 
   return (
     <Tooltip title="Ajouter au panier">
-      <Button 
+      <Button
         type={compact ? 'text' : 'primary'}
         icon={<ShoppingCartOutlined />}
         onClick={handleAddToCart}

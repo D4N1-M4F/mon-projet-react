@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Menu, Input, Avatar, Dropdown, Typography, 
-  Badge, Button, Space, message, Drawer, Layout 
+import React, { useEffect, useState } from 'react';
+import {
+  Menu, Input, Avatar, Dropdown, Typography,
+  Badge, Button, Space, message, Drawer, Layout
 } from 'antd';
-import { 
-  MenuOutlined, ShoppingCartOutlined, SearchOutlined, 
+import {
+  MenuOutlined, ShoppingCartOutlined, SearchOutlined,
   UserOutlined, LoginOutlined, UserAddOutlined,
   LogoutOutlined, DashboardOutlined, BellOutlined,
-  QuestionCircleOutlined, ShoppingFilled 
+  QuestionCircleOutlined
 } from '@ant-design/icons';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useCart } from '../contexts/CartContext';
 
 const { Header } = Layout;
 const { Title } = Typography;
@@ -19,13 +20,13 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [, setSearchQuery] = useState('');
-  const [cartItems] = useState(5); // Exemple: 5 articles dans le panier
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [currentPath, setCurrentPath] = useState('/');
+  const { cartItems } = useCart();
+  const cartItemsCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-  // Gestion de l'authentification et du responsive
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userData = JSON.parse(localStorage.getItem('user'));
@@ -49,7 +50,7 @@ const Navbar = () => {
         <Link to="/profile">Mon profil</Link>
       </Menu.Item>
       <Menu.Item key="orders" icon={<ShoppingCartOutlined />}>
-        <Link to="/orders">Mes commandes ({cartItems})</Link>
+        <Link to="/suivi-commande/:orderId">Mes commandes ({cartItemsCount})</Link>
       </Menu.Item>
       <Menu.Item key="notifications" icon={<BellOutlined />}>
         <Link to="/notifications">Notifications</Link>
@@ -63,12 +64,7 @@ const Navbar = () => {
       <Menu.Item key="help" icon={<QuestionCircleOutlined />}>
         <Link to="/help">Aide</Link>
       </Menu.Item>
-      <Menu.Item 
-        key="logout" 
-        icon={<LogoutOutlined />} 
-        danger
-        onClick={handleLogout}
-      >
+      <Menu.Item key="logout" icon={<LogoutOutlined />} danger onClick={handleLogout}>
         Déconnexion
       </Menu.Item>
     </Menu>
@@ -77,7 +73,6 @@ const Navbar = () => {
   const mainMenuItems = [
     { key: 'home', label: <Link to="/">Accueil</Link> },
     { key: 'products', label: <Link to="/Produits">Produits</Link> },
-    { key: 'categories', label: <Link to="/Gammes">Catégories</Link> },
     { key: 'contact', label: <Link to="/contact">Contact</Link> },
     { key: 'about', label: <Link to="/about">À propos</Link> },
   ];
@@ -97,13 +92,11 @@ const Navbar = () => {
     }}>
       {/* Logo */}
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        
-        
         <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <Avatar 
+          <Avatar
             src="/logo.png"
             size="large"
-            style={{ 
+            style={{
               backgroundColor: '#1890ff',
               color: '#fff',
               fontWeight: 'bold',
@@ -112,8 +105,8 @@ const Navbar = () => {
           >
             SN
           </Avatar>
-          <Title level={4} style={{ 
-            margin: 0, 
+          <Title level={4} style={{
+            margin: 0,
             color: '#1890ff',
             fontWeight: 600,
             display: { xs: 'none', md: 'block' }
@@ -129,8 +122,8 @@ const Navbar = () => {
         mode="horizontal"
         selectedKeys={[currentPath.split('/')[1] || 'home']}
         items={mainMenuItems}
-        style={{ 
-          flex: 1, 
+        style={{
+          flex: 1,
           minWidth: 0,
           justifyContent: 'center',
           borderBottom: 'none',
@@ -148,9 +141,9 @@ const Navbar = () => {
           onSearch={value => setSearchQuery(value)}
         />
 
-        <Badge count={cartItems} size="small">
-          <Button 
-            type="text" 
+        <Badge count={cartItemsCount} size="small">
+          <Button
+            type="text"
             icon={<ShoppingCartOutlined style={{ fontSize: 20 }} />}
             onClick={() => navigate('/Panier')}
           />
@@ -160,9 +153,9 @@ const Navbar = () => {
           <Dropdown overlay={userMenu} placement="bottomRight" arrow>
             <Button type="text" style={{ padding: '0 8px' }}>
               <Space>
-                <Avatar 
-                  size="small" 
-                  src={user?.avatar} 
+                <Avatar
+                  size="small"
+                  src={user?.avatar}
                   icon={<UserOutlined />}
                 />
                 <span style={{ display: { xs: 'none', md: 'inline' } }}>
@@ -173,15 +166,15 @@ const Navbar = () => {
           </Dropdown>
         ) : (
           <Space.Compact>
-            <Button 
-              type="text" 
+            <Button
+              type="text"
               icon={<LoginOutlined />}
               onClick={() => navigate('/login')}
             >
               Connexion
             </Button>
-            <Button 
-              type="primary" 
+            <Button
+              type="primary"
               icon={<UserAddOutlined />}
               onClick={() => navigate('/register')}
             >

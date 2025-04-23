@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
-
+import { CartProvider } from './components/contexts/CartContext';
 import Navbar from './components/layout/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -11,6 +11,7 @@ import ListeCommandeClient from './pages/listecommandeclient';
 import AdminDashboard from './pages/AdminDashboard';
 import Login from './pages/Login';
 import Produits from './pages/Produits';
+import ProduitInfo from './pages/ProduitInfo';
 import Panier from './pages/Panier';
 import Paiement from './pages/Paiement';
 
@@ -21,6 +22,7 @@ const { Header, Content, Footer } = Layout;
 
 function App() {
   return (
+    <CartProvider>
     <Router>
       
 
@@ -50,6 +52,7 @@ function App() {
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/Produits" element={<Produits />} />
+            <Route path="/produit/:id" element={<ProduitInfo />} />
             <Route path="/Panier" element={<Panier />} />
             <Route path="/Paiement" element={<Paiement />} />
 
@@ -64,6 +67,7 @@ function App() {
         
       
     </Router>
+    </CartProvider>
   );
 }
 
