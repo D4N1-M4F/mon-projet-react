@@ -6,7 +6,7 @@ import {
   Image, Tabs, Rate, InputNumber, Space, Spin
 } from 'antd';
 import axios from 'axios';
-import { useCart } from '../components/contexts/CartContext';
+import { useCart } from '../components/contexts/cartcontext';
 
 const { Title, Text } = Typography;
 const { TabPane } = Tabs;
