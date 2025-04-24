@@ -10,7 +10,7 @@ import {
   QuestionCircleOutlined
 } from '@ant-design/icons';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useCart } from '../contexts/CartContext';
+import { useCart } from '../contexts/cartcontext';
 
 const { Header } = Layout;
 const { Title } = Typography;
