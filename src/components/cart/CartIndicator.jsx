@@ -2,7 +2,7 @@ import React from 'react';
 import { Badge } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import { useCart } from '../contexts/CartContext';
+import { useCart } from '../contexts/cartcontext';
 
 const CartIndicator = () => {
     const { itemsCount } = useCart();

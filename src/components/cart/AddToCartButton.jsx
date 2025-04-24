@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Tooltip } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
-import { useCart } from '../contexts/CartContext';
+import { useCart } from '../contexts/cartcontext';
 
 const AddToCartButton = ({ product, compact = false }) => {
   const { addToCart } = useCart();
